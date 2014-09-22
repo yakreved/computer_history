@@ -2,19 +2,24 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Rails Bootstrap" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Bootstrap" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <title><%= content_for?(:title) ? yield(:title) : "История советских ЭВМ" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "История советских ЭВМ" %>">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <br/>
+          <%= render 'layouts/navigation' %>
+        </div>
+        <div class="col-sm-9 col-md-10">
+             <%= render 'layouts/messages' %> 
+             <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
