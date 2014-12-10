@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Title" content="Тест" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+
+<script type="text/javascript">
+var d=document, rez=0, 
+    time='600',         //общее время
+    ball=3,            //балл за вопрос
+    vsego=10,           //всего вопросов
+    count=0;           //Кол-во правильных ответов
+
+
+function timer(){
+var obj=document.getElementById('timer');
+
+obj.innerHTML--;
+	  
+if(obj.innerHTML==0){
+
+stopTest();
+setTimeout(function(){},1000);}
+
+else{setTimeout(timer,1000);}
+
+}
+
+
+function startTest(){
+d.getElementById("timer").innerHTML=time;   
+setTimeout(timer,1000);
+d.getElementById("blok").style.display='block';
+d.getElementById("btStart").style.display='none';
+
+}
+
+function stopTest(){
+
+var i=0;
+
+//Первый вопрос (переключатели)
+for(i=0; i<d.getElementsByName("q1").length; i++){
+    
+    if(d.getElementsByName("q1")[i].checked) {
+      
+      if(i==0){rez+=3; count++;}      //какой правильный чекбокс, начинается с 0 
+    }
+}
+
+
+
+//Второй вопрос (чекБоксы)
+for(i=0; i<d.getElementsByName("q2").length; i++){
+
+    if(d.getElementsByName("q2")[i].checked) {
+      
+      if(i==0){rez+=1; count++;}      //какой правильный чекбокс, начинается с 0 
+      if(i==2){rez+=1; count++;}
+      if(i==3){rez+=1; count++;}
+    }
+
+}
+
+
+//Третий вопрос (выподающий список)
+for(i=0; i<d.getElementById("q3").options.length; i++){
+
+    if(d.getElementById("q3").options[i].selected){
+        
+        if(i==3){rez+=3; count++;}    //правильная строка - начинается с  0 
+    }  
+}
+
+//Четвертый вопрос (текстовая строка)
+if(d.getElementsByName("q4")[0].value.search("Эльбрус")!=-1){rez+=3; count++;}
+
+//Пятый вопрос (текстовая строка)
+if(d.getElementsByName("q5")[0].value.search("ДВК")!=-1){rez+=3;count++;}
+
+//6
+for(i=0; i<d.getElementsByName("q6").length; i++){
+    
+    if(d.getElementsByName("q6")[i].checked) {
+      
+      if(i==1){rez+=3; count++;}      //какой правильный чекбокс, начинается с 0 
+    }
+}
+
+//7
+for(i=0; i<d.getElementsByName("q7").length; i++){
+    
+    if(d.getElementsByName("q7")[i].checked) {
+      
+      if(i==3){rez+=3; count++;}      //какой правильный чекбокс, начинается с 0 
+    }
+}
+
+//8 вопрос (чекБоксы)
+for(i=0; i<d.getElementsByName("q8").length; i++){
+
+    if(d.getElementsByName("q8")[i].checked) {
+      
+      if(i==2){rez+=1; count++;}
+      if(i==3){rez+=2; count++;}
+    }
+
+}
+
+//9 вопрос (чекБоксы)
+for(i=0; i<d.getElementsByName("q9").length; i++){
+
+    if(d.getElementsByName("q9")[i].checked) {
+      if(i==0){rez+=1; count++;}
+      if(i==2){rez+=1; count++;}
+      if(i==3){rez+=1; count++;}
+    }
+
+}
+
+//10 вопрос (текстовая строка)
+if(d.getElementsByName("q10")[0].value.search("Лебедев")!=-1){rez+=3;count++;}
+
+alert('Вы набрали '+((rez/ball)/vsego)*100+'% правильных ответов.');         
+
+d.getElementById("blok").style.display='none';
+d.getElementById("btStart").style.display='block';
+location.reload(true);
+rez=0;
+count=0;
+}
+
+</script>
+
+
+	<title>Тест</title>
+ 
+ <style type="text/css">
+<!--
+#blok{
+display: none;
+}
+
+-->
+</style>   
+    
+</head>
+
+<body>
+	<h1>Тест</h1>
+Небольшой тест на остаточные знания после прочтения электронного пособия. 
+<br />
+На прохождение отводится 10 минут.
+<br /><br />
+<input type="button" name="btStart" value="Начать тест тест" onclick="startTest()" id="btStart"/>
+
+<div id="blok">
+<p style="float:left;">Осталось времени:&nbsp;</p>
+<p id="timer"></p>
+
+<form method="get" enctype="text/plain" name="testForm">
+<div id="blockQuest">
+<br />
+<p class="quest">Какая из перечисленных ЭВМ обладала троичной логикой?</p>
+<input type="radio" name="q1" value="1" />Сетунь<br />
+<input type="radio" name="q1" value="2" />БЭСМ<br />
+<input type="radio" name="q1" value="3" />Мир<br />
+<input type="radio" name="q1" value="4" />ЕС 1035<br />
+</div>
+<br />
+<div id="blockQuest">
+<p class="quest">Какие из перечисленных ЭВМ были построены на лампах?</p>
+
+<input type="checkbox" name="q2" value="1" />МЭСМ<br />
+<input type="checkbox" name="q2" value="2" />ДВК<br />
+<input type="checkbox" name="q2" value="3" />БЭСМ<br />
+<input type="checkbox" name="q2" value="3" />Урал-1<br />
+
+
+</div>
+<br />
+
+<div id="blockQuest">
+<p class="quest">Какая из ЭВМ была разработана в Пензенском НИИ математических машин?</p>
+
+<select name="q3" id="q3">
+	<option value="1">МЭСМ</option>
+	<option value="2">БЭСМ</option>
+	<option value="3">ДВК</option>
+	<option value="4">Урал-1</option>
+	<option value="5">ЕС 1035</option>
+	<option value="6">Мир</option>
+	<option value="7">Эльбрус</option>
+</select>
+
+</div>
+<br />
+
+<div id="blockQuest">
+<p class="quest">Разработка какой серии ЭВМ продолжается и в настоящее время?</p>
+<input type="text" name="q4" />
+</div>
+<div id="blockQuest">
+<p class="quest">Эта серия советских ЭВМ первая позиционировадась, как персональные компьютеры</p>
+<input type="text" name="q5" />
+</div>
+<br />
+<div id="blockQuest">
+<p class="quest">Официальной датой рождения советской вычислительной техники следует считать:</p>
+	<input type="radio" name="q6" value="1" />1946 г<br />
+	<input type="radio" name="q6" value="2" />1948 г<br />
+	<input type="radio" name="q6" value="3" />1951 г<br />
+	<input type="radio" name="q6" value="4" />1955 г<br />
+</div>
+<br />
+<div id="blockQuest">
+<p class="quest">Эта серия ЭВМ Архитектурно повторяла мини-ЭВМ фирмы DEC PDC-11 и PDP-11:</p>
+<input type="radio" name="q7" value="1" />ЕС 1035<br />
+<input type="radio" name="q7" value="2" />Мир<br />
+<input type="radio" name="q7" value="3" />Эльбрус<br />
+<input type="radio" name="q7" value="4" />ДВК<br />
+</div>
+<br />
+
+<div id="blockQuest">
+<p class="quest">Какие из перечисленных ЭВМ поддерживали языки высокого уровня?</p>
+
+<input type="checkbox" name="q8" value="1" />МЭСМ<br />
+<input type="checkbox" name="q8" value="2" />Урал-1<br />
+<input type="checkbox" name="q8" value="3" />Мир<br />
+<input type="checkbox" name="q8" value="3" />ДВК<br />
+
+
+</div>
+<br />
+
+<div id="blockQuest">
+<p class="quest">Какие(из перечисленных) языки поддерживала операционная система ДОС-2, поставляемая с ЭВМ МИР?</p>
+
+<input type="checkbox" name="q9" value="1" />Фортран-4<br />
+<input type="checkbox" name="q9" value="2" />С<br />
+<input type="checkbox" name="q9" value="3" />Кобол<br />
+<input type="checkbox" name="q9" value="3" />Ассемблер<br />
+
+</div>
+<br />
+
+<div id="blockQuest">
+<p class="quest">Фамилия основоположника советской вычислительной техники:</p>
+<input type="text" name="q10" />
+</div>
+<br />
+<input type="button" value="Принять ответ" name="ok" onclick="stopTest()"/>
+
+<input type="reset" value="Сбросить" name="res" />
+<br />
+</form>
+</div>
+</body>
+</html>
